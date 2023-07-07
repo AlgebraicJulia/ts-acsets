@@ -6,20 +6,20 @@ on:
 name: Build and Test
 
 jobs:
-  # test:
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #     - name: Check out repository
-  #       uses: actions/checkout@v3
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v3
 
-  #     - name: Set up NPM
-  #       uses: actions/setup-node@v3
-  #       with:
-  #         node-version: 18
+      - name: Set up NPM
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
 
-  #     - run: npm ci
+      - run: npm ci
 
-  #     - run: npm test
+      - run: npm test
 
   # check:
   #   runs-on: ubuntu-latest
