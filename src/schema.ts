@@ -31,6 +31,10 @@ export interface ICatlabSchema {
   Attr: IAttr[];
 }
 
+/**
+This class represents objects in schemas. In an acset, there is a table for
+each object in the schema.
+*/
 export class Ob {
   readonly name: string;
 
@@ -45,6 +49,12 @@ export class Ob {
   }
 }
 
+/**
+This class represents morphisms in schemas. In an acset, the table corresponding
+to an object `x` has a foreign key column for every morphism in the schema that
+has a domain (`dom`) of `x`, that has ids that reference rows in the table for
+the codomain (`codom`).
+*/
 export class Hom {
   readonly name: string;
   readonly dom: string;
@@ -65,6 +75,11 @@ export class Hom {
   }
 }
 
+/**
+This class represents attribute types in schemas. An attribute type is the "codomain"
+of attributes. In an acset, each attrtype is associated with a type. But in general,
+acsets are "polymorphic" over the types of their attributes.
+*/
 export class AttrType {
   readonly name: string;
 
@@ -79,6 +94,10 @@ export class AttrType {
   }
 }
 
+/**
+This class represents attributes in schemas. An attribute corresponds to a
+non-foreign-key column in the table for its domain (`dom`).
+*/
 export class Attr {
   readonly name: string;
   readonly dom: string;
@@ -99,6 +118,11 @@ export class Attr {
   }
 }
 
+/**
+We use this version spec to version the serialization format, so that if we
+change the serialization format, we can migrate old serializations into new
+ones.
+*/
 export class VersionSpec {
   readonly ACSetSchema: string;
   readonly Catlab: string;
@@ -168,8 +192,15 @@ export class CatlabSchema {
   }
 }
 
+/**
+The things that can be set on a part in an acset.
+*/
 export type Property = Hom | Attr;
 
+/**
+This is a schema for an acset. Every acset needs a schema, to restrict the allowed
+operations to ensure consistency.
+*/
 export class Schema {
   readonly ob_by_name: Map<string, Ob>;
 
