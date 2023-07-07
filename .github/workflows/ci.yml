@@ -21,43 +21,43 @@ jobs:
 
       - run: npm test
 
-  # check:
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #     - name: Check out repository
-  #       uses: actions/checkout@v3
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v3
 
-  #     - name: Set up NPM
-  #       uses: actions/setup-node@v3
-  #       with:
-  #         node-version: 18
+      - name: Set up NPM
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
 
-  #     - run: npm ci
+      - run: npm ci
 
-  #     - run: npm run build
+      - run: npm run build
 
-  #     - run: npm run check-format
+      - run: npm run check-format
 
-  #     - run: npm run lint
+      - run: npm run lint
 
-  # docs:
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #     - name: Check out repository
-  #       uses: actions/checkout@v3
+  docs:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v3
 
-  #     - name: Set up NPM
-  #       uses: actions/setup-node@v3
-  #       with:
-  #         node-version: 18
+      - name: Set up NPM
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
 
-  #     - run: npm ci
+      - run: npm ci
 
-  #     - run: npm run docs
+      - run: npm run docs
 
-  #     - uses: actions/upload-pages-artifact
-  #       with:
-  #         path: "docs"
+      - uses: actions/upload-pages-artifact@v1
+        with:
+          path: "docs"
 
   # deploy:
   #   # Add a dependency to the build job
