@@ -26,9 +26,8 @@ export class ACSet {
   /**
   Initialize a new ACSet.
 
-  Args:
-      name: The name of the ACSset.
-      schema: The schema of the ACSet.
+  @param name - The name of the ACSset.
+  @param schema - The schema of the ACSet.
   */
   constructor(name: string, schema: Schema) {
     this.name = name;
@@ -42,12 +41,10 @@ export class ACSet {
   /**
   Add `n` parts to an object in the ACset.
 
-  Args:
-      ob: The object in the ACSet to add parts to.
-      n: The number of parts to be added.
+  @param ob - The object in the ACSet to add parts to.
+  @param n - The number of parts to be added.
 
-  Returns:
-      A range of the indexes of the new parts added to the object.
+  @returns A range of the indexes of the new parts added to the object.
   */
   addParts(ob: Ob, n: number): [number, number] {
     const i = this._parts.get(ob);
@@ -61,11 +58,9 @@ export class ACSet {
   /**
   Add a single part to an object in the ACSet
 
-  Args:
-      ob: The object in the ACSet to add a part to.
+  @param ob - The object in the ACSet to add a part to.
 
-  Returns:
-      The index of the new part added to the object.
+  @returns The index of the new part added to the object.
   */
   addPart(ob: Ob): number {
     return this.addParts(ob, 1)[0];
@@ -81,12 +76,10 @@ export class ACSet {
   /**
   Check if a property exists for a given row in a table of the ACSset.
 
-  Args:
-      i: The row index for the property mapping to be added to.
-      f: The `Hom` or `Attr` to check for.
+  @param i - The row index for the property mapping to be added to.
+  @param f - The `Hom` or `Attr` to check for.
 
-  Returns:
-      `True` if the property `f` exists on row `i` or `False` if it doesn't.
+  @param `True` if the property `f` exists on row `i` or `False` if it doesn't.
   */
   hasSubpart(i: number, f: Property): boolean {
     const map = this._subparts.get(f);
@@ -96,10 +89,9 @@ export class ACSet {
   /**
   Modify a morphism or attribute for a row in a table of the ACSet.
 
-  Args:
-      i: The row index for the property mapping to be added to.
-      f: The `Hom` or `Attr` to modify.
-      x: A valid type for the given `Hom` or `Attr` to set the value or `None` to delete the property.
+  @param i - The row index for the property mapping to be added to.
+  @param f - The `Hom` or `Attr` to modify.
+  @param x - A valid type for the given `Hom` or `Attr` to set the value or `None` to delete the property.
   */
   setSubpart(i: number, f: Property, x: any) {
     if (x === undefined) {
@@ -114,12 +106,10 @@ export class ACSet {
   /**
   Get the subpart of a part in an ACSet
 
-  Args:
-      i: The part that you are indexing.
-      f: The `Hom` or `Attr` to retrieve.
+  @param i - The part that you are indexing.
+  @param f - The `Hom` or `Attr` to retrieve.
 
-  Returns:
-      The subpart of the ACset.
+  @returns The subpart of the ACset.
   */
   subpart(i: number, f: Property): any {
     return this._subparts.get(f)?.get(i);
@@ -128,11 +118,9 @@ export class ACSet {
   /**
   Get the number of rows in a given table of the ACSet.
 
-  Args:
-      ob: The object in the ACSet.
+  @param ob - The object in the ACSet.
 
-  Returns:
-      The number of rows in `ob`.
+  @returns The number of rows in `ob`.
   */
   nparts(ob: Ob): number {
     const n = this._parts.get(ob);
@@ -145,11 +133,9 @@ export class ACSet {
   /**
   Get all of the row indexes in a given table of the ACSet.
 
-  Args:
-      ob: The object in the ACSet.
+  @param ob - The object in the ACSet.
 
-  Returns:
-      The range of all of the rows in `ob`.
+  @returns The range of all of the rows in `ob`.
   */
   parts(ob: Ob): [number, number] {
     return [0, this.nparts(ob)];
@@ -162,12 +148,10 @@ export class ACSet {
   /**
   Get all of the subparts incident to a part in the ACset.
 
-  Args:
-      x: The subpart to look for.
-      f: The `Hom` or `Attr` mapping to search.
+  @param x - The subpart to look for.
+  @param f - The `Hom` or `Attr` mapping to search.
 
-  Returns:
-      A list indexes.
+  @returns A list indexes.
   */
   incident(x: any, f: Property): number[] {
     if (!this.schema.schema.homs.includes(f) && !this.schema.schema.attrs.includes(f)) {
@@ -205,8 +189,7 @@ export class ACSet {
   /**
   Serialize the ACSet to a JSON object.
 
-  Returns:
-      The JSON object of the serialized ACSet.
+  @returns The JSON object of the serialized ACSet.
   */
   export(): ExportedACSet {
     return Object.fromEntries(
@@ -218,15 +201,13 @@ export class ACSet {
   }
 
   /**
-  Deserialize a JSON string to an ACSet with a given `Schema`.
+  Deserialize a JSON object to an ACSet with a given `Schema`.
 
-  Args:
-      name: The name of the ACSset.
-      schema: The `Schema` of the ACSet that is defined in the given JSON.
-      s: The JSON string
+  @param name - The name of the ACSset.
+  @param schema - The `Schema` of the ACSet that is defined in the given JSON.
+  @param s - The JSON object
 
-  Returns:
-      The deserialized ACSet object.
+  @returns The deserialized ACSet object.
   */
   static import(name: string, schema: Schema, exported: ExportedACSet): ACSet {
     const acset = new ACSet(name, schema);
