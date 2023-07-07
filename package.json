@@ -1,6 +1,6 @@
 {
   "name": "acsets",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "An implementation of acsets in typescript, compatible with ACSets.jl and pyacsets",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
